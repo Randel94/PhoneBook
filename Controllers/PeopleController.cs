@@ -32,10 +32,12 @@ namespace PhoneBook.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
+                DateTime.TryParse(searchString, out var date);
+
                 people = people.Where(s => s.Name.Contains(searchString)
                                        || s.SName.Contains(searchString)
-                                       || s.BDate.ToString().Contains(searchString)
-                                       || s.PhoneNumbers.Contains(new PhoneNumber { Number = searchString}));
+                                       || s.BDate == date
+                                       || s.PhoneNumbers.Any(x => x.Number.Contains(searchString)));
             }
 
             switch (sortOrder)
