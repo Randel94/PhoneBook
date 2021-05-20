@@ -16,7 +16,16 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color">
+                        <p>
+                            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                            <input type="submit" value="Поиск" class="btn btn-default" />
+                        </p>
+                    </div>
+                </form>
             </div>
+            
         </nav>
     </header>
     <div class="container">
