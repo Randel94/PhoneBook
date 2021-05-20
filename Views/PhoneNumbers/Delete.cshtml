@@ -1,0 +1,22 @@
+﻿@model PhoneBook.Models.PhoneNumber
+
+@{
+    ViewData["Title"] = "Удаление номера";
+}
+<a asp-controller="People" asp-action="Details" asp-route-id="@Model.PersonId">Назад</a>
+<div>
+    <h2>
+        @Html.DisplayFor(model => model.Person.Name)
+        @Html.DisplayFor(model => model.Person.SName)
+    </h2>
+    <dl class="row">
+        <dd class="col-sm-12">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+    </dl>
+    <h4>Вы уверены что хотите удалить этот номер?</h4>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>

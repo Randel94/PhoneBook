@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PhoneBook.Models.Person>
+
+@{
+    ViewData["Title"] = "Phone Book";
+}
+
+<h1>Контакты</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+        </p>
+    </div>
+</form>
+
+
+<a asp-controller="People" asp-action="Create">Добавить контакт</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SNameSortParm"]">@Html.DisplayNameFor(model => model.SName)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumbers)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a asp-controller="People" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                
+            </td>
+            <td>
+                <a asp-controller="People" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.SName)</a>
+            </td>
+            <td>
+                <dl class="row">
+                    @foreach (var number in item.PhoneNumbers)
+                    {
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelNumber => number.Number)
+                        </dd>
+                    }
+                </dl>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,40 @@
+﻿@model PhoneBook.Models.Person
+
+@{
+    ViewData["Title"] =
+        @Html.DisplayFor(model => model.Name);
+}
+
+<a asp-action="Index">Назад</a>
+<div>
+    <h2>
+        @Html.DisplayFor(model => model.Name)
+        @Html.DisplayFor(model => model.SName)
+    </h2>
+    <dl class="row">
+        <dt class="col-sm-12">
+            @Html.DisplayNameFor(model => model.BDate)
+        </dt>
+        <dd class="col-sm-12">
+            @Html.DisplayFor(model => model.BDate)
+        </dd>
+        <dt class="col-sm-12">
+            @Html.DisplayNameFor(model => model.PhoneNumbers)
+        </dt>
+        @foreach (var item in Model.PhoneNumbers)
+        {
+            <dd class="col-sm-2">
+                @Html.DisplayFor(modelItem => item.Number)
+            </dd>
+            <dd class="col-sm-10">
+                <a asp-controller="PhoneNumbers" asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-controller="PhoneNumbers" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-controller="PhoneNumbers" asp-action="Create" asp-route-id="@Model.Id">Добавить номер</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить контакт</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id">Удалить контакт</a>
+</div>
